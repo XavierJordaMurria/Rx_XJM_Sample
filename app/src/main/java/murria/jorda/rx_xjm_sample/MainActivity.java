@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ import com.jakewharton.rxbinding.widget.RxTextView;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.widget.Toast;
 
 public class MainActivity extends Activity
 {
@@ -106,8 +108,11 @@ public class MainActivity extends Activity
             buttonObservable.buffer(1000, TimeUnit.MILLISECONDS)
                 .filter(clicks -> clicks.size() >= 3)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(clicks -> {
-                    Log.d("CLICK", "CLICK");
+                .subscribe(clicks ->
+                {
+                    Log.d("CLICK", "Button clicked 3 times in 1sec");
+                    Toast.makeText(getActivity(), "Button clicked 3 times in 1sec",
+                            Toast.LENGTH_LONG).show();
                 });
         }
 
